@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_bottom_home_no_select"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/bottom_home"
+        tools:ignore="AlwaysShowAction"/>
+    <item
+        android:id="@+id/qrFragment"
+        android:icon="@drawable/ic_bottom_qr_no_select"
+        app:showAsAction="always"
+        android:title="@string/bottom_home"
+        tools:ignore="AlwaysShowAction"/>
+    <item
+        android:id="@+id/mypageFragment"
+        android:icon="@drawable/ic_bottom_mypage_no_select"
+        app:showAsAction="always"
+        android:title="@string/bottom_my_page"
+        tools:ignore="AlwaysShowAction"/>
+</menu>

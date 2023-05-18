@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ensor</string>
+
+    <!--    main bottom-->
+    <string name="bottom_home">Home</string>
+    <string name="bottom_qr">QR</string>
+    <string name="bottom_my_page">My Page</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
