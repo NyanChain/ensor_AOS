@@ -1,7 +1,10 @@
 package com.nyanchain.ensor.ui.activity
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.kakao.sdk.common.util.Utility
 import com.nyanchain.ensor.ui.fragment.HomeFragment
 import com.nyanchain.ensor.ui.fragment.MyPageFragment
 import com.nyanchain.ensor.ui.fragment.QrFragment
@@ -16,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d(TAG, "keyhash : ${Utility.getKeyHash(this)}")
 
         initBottomNavigation()
 

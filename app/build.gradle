@@ -31,7 +31,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
     buildFeatures {
         dataBinding true
@@ -121,4 +121,8 @@ dependencies {
 
     // cardview
     implementation("androidx.cardview:cardview:1.0.0")
+
+    //kakao login
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.0'
+    implementation "com.kakao.sdk:v2-user:2.5.0"
 }
