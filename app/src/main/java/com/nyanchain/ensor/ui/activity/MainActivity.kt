@@ -1,7 +1,9 @@
 package com.nyanchain.ensor.ui.activity
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.nyanchain.ensor.ui.fragment.HomeFragment
 import com.nyanchain.ensor.ui.fragment.MyPageFragment
 import com.nyanchain.ensor.ui.fragment.QrFragment
@@ -13,21 +15,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initBottomNavigation()
-
     }
 
-    private fun initBottomNavigation(){
+
+    private fun initBottomNavigation() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, QrFragment())
             .commitAllowingStateLoss()
 
-        binding.mainBnv.setOnItemSelectedListener{ item ->
+        binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
