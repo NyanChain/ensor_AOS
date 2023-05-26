@@ -14,7 +14,7 @@
         android:id="@+id/qrFragment"
         android:icon="@drawable/ic_bottom_qr_no_select"
         app:showAsAction="always"
-        android:title="@string/bottom_home"
+        android:title="@string/bottom_qr"
         tools:ignore="AlwaysShowAction"/>
     <item
         android:id="@+id/mypageFragment"
