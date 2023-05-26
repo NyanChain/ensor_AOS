@@ -8,5 +8,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--    qr-->
+    <string name="qr_intro">QR 코드를 스캔하여\n인증정보 불러오기</string>
+    <string name="tv_authentication_certification">인증기관:\ </string>
+    <string name="tv_authentication_context">인증내용:\ </string>
+    <string name="tv_go_authentication">나의 인증 정보에 저장하기  ></string>
+
+    <string name="tv_retry">다시 QR 인증 하기</string>
+
+    <!--    my page-->
+    <string name="tv_email">Email : </string>
+    <string name="tv_nickname">닉네임 : </string>
+    <string name="tv_save">저장된 인증 정보</string>
+
+
+
+
 
 </resources>
