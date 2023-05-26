@@ -29,7 +29,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.FirstActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".ui.activity.MainActivity"></activity>
+        <!-- Kakao 로그인 -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <!-- scheme-example: "kakao{NATIVE_APP_KEY}" -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaobcf3104d8999b4bf8135a157083a63bd" />
+
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

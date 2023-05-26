@@ -8,6 +8,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
     <!--    qr-->
     <string name="qr_intro">QR 코드를 스캔하여\n인증정보 불러오기</string>
     <string name="tv_authentication_certification">인증기관:\ </string>
@@ -23,6 +24,11 @@
 
 
 
+
+    <!-- Kakao init에서 사용-->
+    <string name="kakao_app_key">bcf3104d8999b4bf8135a157083a63bd</string>
+    <!--AndroidManifest.xml에서 사용-->
+    <string name="kakao_app_key2">bcf3104d8999b4bf8135a157083a63bd</string>
 
 
 </resources>
