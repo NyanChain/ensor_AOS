@@ -23,8 +23,6 @@
     <string name="tv_save">저장된 인증 정보</string>
 
 
-
-
     <!-- Kakao init에서 사용-->
     <string name="kakao_app_key">bcf3104d8999b4bf8135a157083a63bd</string>
     <!--AndroidManifest.xml에서 사용-->

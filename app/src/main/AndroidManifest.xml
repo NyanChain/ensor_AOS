@@ -8,6 +8,7 @@
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -31,13 +32,20 @@
         <activity
             android:name=".ui.activity.FirstActivity"
             android:exported="true">
+
+        </activity>
+
+        <activity android:name=".ui.activity.MainActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".ui.activity.MainActivity"></activity>
+
         <!-- Kakao 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

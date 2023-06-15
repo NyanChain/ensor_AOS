@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -55,6 +55,16 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_semibold"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/text"
+            app:layout_constraintTop_toTopOf="@+id/text" />
 
         <TextView
             android:id="@+id/my_email"
@@ -68,7 +78,7 @@
             app:layout_constraintTop_toTopOf="@+id/tv_email" />
 
         <TextView
-            android:id="@+id/tv_nickname"
+            android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -78,6 +88,16 @@
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_semibold"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text2"
+            app:layout_constraintStart_toEndOf="@+id/text2"/>
 
         <TextView
             android:id="@+id/my_nickname"
