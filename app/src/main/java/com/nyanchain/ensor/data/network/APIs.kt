@@ -1,6 +1,7 @@
 package com.nyanchain.ensor.data.network
 
 
+import com.google.gson.JsonElement
 import com.nyanchain.ensor.data.model.response.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -17,7 +18,7 @@ interface APIs {
     @POST("/censor")
     suspend fun postQr(
         @Body body: QrRequest
-    ) : Response<QrResponse>
+    ) : Response<JsonElement> //Todo: 백엔드 수정되면 QrResponse로 수정
 
     @GET("/mypage")
     suspend fun myPage(

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -14,10 +15,17 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.nyanchain.ensor.R
+import com.nyanchain.ensor.data.network.APIs
 import com.nyanchain.ensor.databinding.ActivityFirstBinding
+import com.nyanchain.ensor.retrofit.RetrofitClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FirstActivity : AppCompatActivity() {
     lateinit var binding: ActivityFirstBinding
+    private lateinit var retService: APIs
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,6 +39,10 @@ class FirstActivity : AppCompatActivity() {
 
 
         binding.btnStartKakaoLogin.setOnClickListener {
+            retService = RetrofitClient
+                .getRetrofitInstance()
+                .create(APIs::class.java)
+
             kakaoLogin()
         }
 //        binding.btnStartKakaoLogout.setOnClickListener {
@@ -51,6 +63,25 @@ class FirstActivity : AppCompatActivity() {
                 setLogin(false)
             } else if (token != null) {
                 //TODO: 최종적으로 카카오로그 인 및 유저정보 가져온 결과
+                lifecycleScope.launch {
+                    try {
+                        val response = withContext(Dispatchers.IO) {
+                            Log.d("accesstoken","${token}")
+                            retService.signUp(APIs.RequestSignup(token.accessToken))
+                        }
+                        if (response.isSuccessful) {
+                            val myPageResponse = response.body()
+                            if (myPageResponse != null) {
+                                // Update UI with myPageResponse data
+                                Log.d("FirstActivity 통신 성공", "Response: ${response.body()}")
+                            }
+                        } else {
+                            Log.d("FirstActivity 통신 요청 실패", "Response not successful: ${response.errorBody()?.string()}")
+                        }
+                    } catch (e: Exception) {
+                        Log.d("FirstActivity 통신 실패", "Exception: ${e.message.toString()}")
+                    }
+                }
                 UserApiClient.instance.me { user, error ->
                     if (error != null) {
                         TextMsg(

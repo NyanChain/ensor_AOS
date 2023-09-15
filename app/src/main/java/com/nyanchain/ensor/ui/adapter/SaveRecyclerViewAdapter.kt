@@ -48,7 +48,7 @@ class SaveRecyclerViewAdapter(
         private val image: ImageView = view.findViewById(R.id.iv_censor_image)
 
         var isClicked = false
-        private val layout: ConstraintLayout = view.findViewById(R.id.constraintLayout)
+//        private val layout: ConstraintLayout = view.findViewById(R.id.constraintLayout)
 
 
         fun bind(task: MysaveResponse, clickListener: (MysaveResponse) -> Unit) {
