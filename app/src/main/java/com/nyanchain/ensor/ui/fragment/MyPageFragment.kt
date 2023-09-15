@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import com.nyanchain.ensor.R
 import com.nyanchain.ensor.base.BaseFragment
 import com.nyanchain.ensor.data.network.APIs
 import com.nyanchain.ensor.databinding.FragmentMyPageBinding
@@ -41,7 +42,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
                 if (response.isSuccessful) {
                     val myPageResponse = response.body()
                     if (myPageResponse != null) {
-                        // Update UI with myPageResponse data
+//                        // Update UI with myPageResponse data
                         binding.tvEmail.text = myPageResponse.email
                         binding.tvNickname.text = myPageResponse.nickname
                         Log.d("MyPageFragment 통신 성공", "Response: ${myPageResponse.toString()}")
@@ -52,6 +53,17 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
             } catch (e: Exception) {
                 Log.d("MyPageFragment 통신 실패", "Exception: ${e.message.toString()}")
             }
+        }
+
+        binding.btnSavedList.setOnClickListener {
+
+            val savedFragment = SaveFragment() // 이동할 Fragment 객체를 생성
+
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.mypageLayout, savedFragment)
+            transaction.addToBackStack(null) // 이전 Fragment 스택에 추가 (뒤로 가기 버튼 사용 가능)
+            transaction.commit()
+
         }
     }
 }

@@ -2,7 +2,7 @@ package com.nyanchain.ensor
 
 object Constants {
     const val GOOGLE_BASE_URL = "http://www.googleapis.com/"
-    const val ENSOR_BASE_URL = "http://192.168.0.53:3000/"
+    const val ENSOR_BASE_URL = "http://52.79.124.126:3000/"
 
     const val CLIENT_ID = "clientId"
 

@@ -56,25 +56,26 @@ class QrCodeActivity : AppCompatActivity() {
                         val response = retService.postQr(APIs.QrRequest(productId))
                         if (response.isSuccessful) {
                             Log.d("ScanQRCodeActivity 통신 성공", "QR Code Result: $response")
-                            validity = response.body()?.tfresult
-                            if (validity == true) {
-                                val successText = "success"
-                                GlobalApplication.prefs.setString("censorText", response.body()?.censorText.toString())
-                                GlobalApplication.prefs.setString("censorCom", response.body()?.censorCom.toString())
-                                GlobalApplication.prefs.setString("imgUrl", response.body()?.imgUrl.toString())
+                            // Todo: 아래 코드는 response 형식 QrResponse로 변경하면 살리기
+//                            validity = response.body()?.tfresult
+//                            if (validity == true) {
+//                                val successText = "success"
+//                                GlobalApplication.prefs.setString("censorText", response.body()?.censorText.toString())
+//                                GlobalApplication.prefs.setString("censorCom", response.body()?.censorCom.toString())
+//                                GlobalApplication.prefs.setString("imgUrl", response.body()?.imgUrl.toString())
 
                                 val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-                                mainActivity.putExtra("fragment", successText)
+                                //mainActivity.putExtra("fragment", successText)
                                 startActivity(mainActivity)
                                 finish()
-                            } else {
-                                val failText = "fail"
-                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-                                mainActivity.putExtra("fragment", failText)
-                                startActivity(mainActivity)
-                                finish()
-                            }
-
+//                            } else {
+//                                val failText = "fail"
+//                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
+//                                mainActivity.putExtra("fragment", failText)
+//                                startActivity(mainActivity)
+//                                finish()
+//                            }
+//
                         } else {
                             Log.d("ScanQRCodeActivity 통신 요청 실패", "QR Code Result: $response")
                         }

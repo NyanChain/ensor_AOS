@@ -30,7 +30,7 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/white"
                     android:gravity="center"
-                    android:text="인증 정보 목록"
+                    android:text="저장된 인증 정보"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="parent"
