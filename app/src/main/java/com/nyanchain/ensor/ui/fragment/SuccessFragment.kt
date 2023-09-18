@@ -54,6 +54,15 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                 .into(binding.authenticationImage)
         }
 
+        binding.btnReview.setOnClickListener {
+            val reviewFragment = ReviewFragment() // 이동할 Fragment 객체를 생성
+
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.successLayout, reviewFragment)
+            transaction.addToBackStack(null) // 이전 Fragment 스택에 추가 (뒤로 가기 버튼 사용 가능)
+            transaction.commit()
+        }
+
         binding.btnSave.setOnClickListener{
             // QR 결과값 서버 post
             lifecycleScope.launch {
@@ -73,7 +82,6 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                 }
             }
         }
-
 
     }
 }
