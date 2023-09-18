@@ -62,7 +62,6 @@ class FirstActivity : AppCompatActivity() {
                 //TextMsg(this, "카카오계정으로 로그인 실패 : ${error}")
                 setLogin(false)
             } else if (token != null) {
-                //TODO: 최종적으로 카카오로그 인 및 유저정보 가져온 결과
                 lifecycleScope.launch {
                     try {
                         val response = withContext(Dispatchers.IO) {
@@ -84,15 +83,13 @@ class FirstActivity : AppCompatActivity() {
                 }
                 UserApiClient.instance.me { user, error ->
                     if (error != null) {
-                        TextMsg(
-                            this, "카카오계정으로 로그인 성공 \n\n " +
+                        Log.d(
+                            "kakao", "카카오계정으로 로그인 성공 \n\n " +
                                     "token: ${token.accessToken} \n\n " +
                                     "me: ${user}"
                         )
                         setLogin(true)
                         val intent = Intent(this, MainActivity::class.java)
-                        intent.putExtra("nickname", "다희")
-                        intent.putExtra("email", "ekgmljeong@naver.com")
                         startActivity(intent)
                         finish()
                     } else if (user != null) {
@@ -116,7 +113,7 @@ class FirstActivity : AppCompatActivity() {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
-                    TextMsg(this, "카카오톡으로 로그인 실패 : ${error}")
+                    Log.d("kakao", "카카오톡으로 로그인 실패 : ${error}")
 
                     // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
                     // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
@@ -127,13 +124,9 @@ class FirstActivity : AppCompatActivity() {
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
-                    TextMsg(this, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    Log.d("kakao", "카카오톡으로 로그인 성공 ${token.accessToken}")
                     setLogin(true)
                     val intent = Intent(this, MainActivity::class.java)
-//                    val nickname = user.kakaoAccount?.profile?.nickname
-//                    val email = user.kakaoAccount?.email
-                    intent.putExtra("nickname", "다희")
-                    intent.putExtra("email", "ekgmljeong@naver.com")
                     startActivity(intent)
                     //finish()
                 }
@@ -169,9 +162,9 @@ class FirstActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun TextMsg(act: Activity, msg : String){
-        binding.tvHashKey.text = msg
-    }
+//    private fun TextMsg(act: Activity, msg : String){
+//        binding.tvHashKey.text = msg
+//    }
 
     private fun setLogin(bool: Boolean){
         binding.btnStartKakaoLogin.visibility = if(bool) View.GONE else View.VISIBLE
