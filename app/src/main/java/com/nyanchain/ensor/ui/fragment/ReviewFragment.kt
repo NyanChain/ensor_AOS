@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nyanchain.ensor.GlobalApplication
 import com.nyanchain.ensor.R
 import com.nyanchain.ensor.base.BaseFragment
 import com.nyanchain.ensor.data.network.APIs
@@ -28,6 +29,8 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
     private var review: String = ""
     private lateinit var reviewViewModel: ReviewViewModel
     private lateinit var reviewRecyclerViewAdapter: ReviewRecyclerViewAdapter
+    private var rating : Int =0
+    private val product = GlobalApplication.prefs.getString("qrCodeData","")
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -42,46 +45,46 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
             .getRetrofitInstance()
             .create(APIs::class.java)
 
-//        binding.star1.setOnClickListener {
-//            rating = 1.0
-//            binding.star1.setImageResource(R.drawable.ic_star_on)
-//            binding.star2.setImageResource(R.drawable.ic_star_off)
-//            binding.star3.setImageResource(R.drawable.ic_star_off)
-//            binding.star4.setImageResource(R.drawable.ic_star_off)
-//            binding.star5.setImageResource(R.drawable.ic_star_off)
-//        }
-//        binding.star2.setOnClickListener {
-//            rating = 2.0
-//            binding.star1.setImageResource(R.drawable.ic_star_on)
-//            binding.star2.setImageResource(R.drawable.ic_star_on)
-//            binding.star3.setImageResource(R.drawable.ic_star_off)
-//            binding.star4.setImageResource(R.drawable.ic_star_off)
-//            binding.star5.setImageResource(R.drawable.ic_star_off)
-//        }
-//        binding.star3.setOnClickListener {
-//            rating = 3.0
-//            binding.star1.setImageResource(R.drawable.ic_star_on)
-//            binding.star2.setImageResource(R.drawable.ic_star_on)
-//            binding.star3.setImageResource(R.drawable.ic_star_on)
-//            binding.star4.setImageResource(R.drawable.ic_star_off)
-//            binding.star5.setImageResource(R.drawable.ic_star_off)
-//        }
-//        binding.star4.setOnClickListener {
-//            rating = 4.0
-//            binding.star1.setImageResource(R.drawable.ic_star_on)
-//            binding.star2.setImageResource(R.drawable.ic_star_on)
-//            binding.star3.setImageResource(R.drawable.ic_star_on)
-//            binding.star4.setImageResource(R.drawable.ic_star_on)
-//            binding.star5.setImageResource(R.drawable.ic_star_off)
-//        }
-//        binding.star5.setOnClickListener {
-//            rating = 5.0
-//            binding.star1.setImageResource(R.drawable.ic_star_on)
-//            binding.star2.setImageResource(R.drawable.ic_star_on)
-//            binding.star3.setImageResource(R.drawable.ic_star_on)
-//            binding.star4.setImageResource(R.drawable.ic_star_on)
-//            binding.star5.setImageResource(R.drawable.ic_star_on)
-//        }
+        binding.star1.setOnClickListener {
+            rating = 1
+            binding.star1.setImageResource(R.drawable.ic_star_on)
+            binding.star2.setImageResource(R.drawable.ic_star_off)
+            binding.star3.setImageResource(R.drawable.ic_star_off)
+            binding.star4.setImageResource(R.drawable.ic_star_off)
+            binding.star5.setImageResource(R.drawable.ic_star_off)
+        }
+        binding.star2.setOnClickListener {
+            rating = 2
+            binding.star1.setImageResource(R.drawable.ic_star_on)
+            binding.star2.setImageResource(R.drawable.ic_star_on)
+            binding.star3.setImageResource(R.drawable.ic_star_off)
+            binding.star4.setImageResource(R.drawable.ic_star_off)
+            binding.star5.setImageResource(R.drawable.ic_star_off)
+        }
+        binding.star3.setOnClickListener {
+            rating = 3
+            binding.star1.setImageResource(R.drawable.ic_star_on)
+            binding.star2.setImageResource(R.drawable.ic_star_on)
+            binding.star3.setImageResource(R.drawable.ic_star_on)
+            binding.star4.setImageResource(R.drawable.ic_star_off)
+            binding.star5.setImageResource(R.drawable.ic_star_off)
+        }
+        binding.star4.setOnClickListener {
+            rating = 4
+            binding.star1.setImageResource(R.drawable.ic_star_on)
+            binding.star2.setImageResource(R.drawable.ic_star_on)
+            binding.star3.setImageResource(R.drawable.ic_star_on)
+            binding.star4.setImageResource(R.drawable.ic_star_on)
+            binding.star5.setImageResource(R.drawable.ic_star_off)
+        }
+        binding.star5.setOnClickListener {
+            rating = 5
+            binding.star1.setImageResource(R.drawable.ic_star_on)
+            binding.star2.setImageResource(R.drawable.ic_star_on)
+            binding.star3.setImageResource(R.drawable.ic_star_on)
+            binding.star4.setImageResource(R.drawable.ic_star_on)
+            binding.star5.setImageResource(R.drawable.ic_star_on)
+        }
 
 
         initRecyclerView()
@@ -91,7 +94,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     try { //Todo: 수정해야됨!!!!
-                        val response = retService.postWrite(APIs.WriteRequest("10007비건쿠션", 4,review))
+                        val response = retService.postWrite(APIs.WriteRequest(product, rating,review))
                         if (response.isSuccessful) {
                             Log.d("ReviewFragment 통신 성공", "Result: $response")
 

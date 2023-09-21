@@ -106,17 +106,43 @@
                 app:layout_constraintStart_toEndOf="@+id/star4"
                 app:layout_constraintTop_toTopOf="@+id/star4"
                 app:layout_constraintVertical_bias="0.0" />
+
+<!--            <EditText-->
+<!--                android:id="@+id/edt_review"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:gravity="left|bottom"-->
+<!--                android:hint="리뷰를 입력하세요"-->
+<!--                android:textSize="14sp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/star4"-->
+<!--                android:maxLength="200"/>-->
+
             <EditText
                 android:id="@+id/edt_review"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="리뷰를 입력하세요"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/bg_review_radius"
+                android:hint="리뷰를 입력하세요(200자 이내)"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                android:padding="@dimen/size_16"
+                android:maxLines="4"
+                android:imeOptions="actionDone"
+                android:textColor="@color/gray_600"
+                android:textSize="14sp"
+                android:fontFamily="@font/suit_regular"
+                android:gravity="top|left"
+                android:layout_marginStart="@dimen/layout_margin_start"
+                android:layout_marginEnd="@dimen/layout_margin_start"
+                android:layout_marginTop="@dimen/size_15"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/star4"
-                android:maxLength="200"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/star4" />
+
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="70dp"
