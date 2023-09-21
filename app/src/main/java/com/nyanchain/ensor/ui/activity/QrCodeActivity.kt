@@ -22,12 +22,13 @@ import com.nyanchain.ensor.ui.fragment.SuccessFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class QrCodeActivity : AppCompatActivity() {
 
     private lateinit var retService: APIs
     private var resultText: String? = null
-    private var validity: Boolean? = null
+    private var validity: String? = null
     private var productId: String? = null
     private var productName: String? = null
 
@@ -42,40 +43,47 @@ class QrCodeActivity : AppCompatActivity() {
             // QR 코드 스캔 결과 처리
             resultText = result.text
             Log.d("ScanQRCodeActivity", "QR Code Result: $resultText")
-            val(productId, productName) = resultText?.split(",")?.map { it.trim() } ?: listOf("", "")
-
-            Log.d("ScanQRCodeActivity", "QR Code Result: $resultText")
-            Log.d("ScanQRCodeActivity", "QR Code Result productName: $productName, productId: $productId")
-            GlobalApplication.prefs.setString("productName", productName)
-            GlobalApplication.prefs.setString("productId", productId)
+//            val(productId, productName) = resultText?.split(",")?.map { it.trim() } ?: listOf("", "")
+//            Log.d("ScanQRCodeActivity", "QR Code Result productName: $productName, productId: $productId")
+            GlobalApplication.prefs.setString("productName", resultText.toString().substring(5))
+            GlobalApplication.prefs.setString("productId", resultText.toString().substring(0,5))
+            GlobalApplication.prefs.setString("qrCodeData", resultText.toString())
 
             // QR 결과값 서버 post
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
-                        val response = retService.postQr(APIs.QrRequest(productId))
+                        val response = retService.postQr(APIs.QrRequest(resultText.toString()))
                         if (response.isSuccessful) {
-                            Log.d("ScanQRCodeActivity 통신 성공", "QR Code Result: $response")
+                            Log.d("ScanQRCodeActivity 통신 성공", "QR Code Result: ${response.body()}")
                             // Todo: 아래 코드는 response 형식 QrResponse로 변경하면 살리기
-//                            validity = response.body()?.tfresult
-//                            if (validity == true) {
-//                                val successText = "success"
-//                                GlobalApplication.prefs.setString("censorText", response.body()?.censorText.toString())
-//                                GlobalApplication.prefs.setString("censorCom", response.body()?.censorCom.toString())
-//                                GlobalApplication.prefs.setString("imgUrl", response.body()?.imgUrl.toString())
+
+                            val jsonObject = JSONObject(response.body().toString())
+                            val resultsArray = jsonObject.getJSONArray("results")
+
+
+                            validity = jsonObject.get("tfresult").toString()
+                            if (validity == "success") {
+                                val successText = "success"
+                                val firstResultObject = resultsArray.getJSONObject(0)
+                                val censorText =
+//                                val data = response.body()?.getAsJsonElement("data")
+                                    GlobalApplication.prefs.setString("censorText", firstResultObject.getString("censorText"))
+                                GlobalApplication.prefs.setString("censorCom", firstResultObject.getString("censorCom"))
+                                GlobalApplication.prefs.setString("imgUrl", firstResultObject.getString("imgUrl"))
 
                                 val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-                                //mainActivity.putExtra("fragment", successText)
+                                mainActivity.putExtra("fragment", successText)
                                 startActivity(mainActivity)
                                 finish()
-//                            } else {
-//                                val failText = "fail"
-//                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-//                                mainActivity.putExtra("fragment", failText)
-//                                startActivity(mainActivity)
-//                                finish()
-//                            }
-//
+                            } else {
+                                val failText = "fail"
+                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
+                                mainActivity.putExtra("fragment", failText)
+                                startActivity(mainActivity)
+                                finish()
+                            }
+
                         } else {
                             Log.d("ScanQRCodeActivity 통신 요청 실패", "QR Code Result: $response")
                         }

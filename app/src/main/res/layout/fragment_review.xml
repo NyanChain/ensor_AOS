@@ -36,6 +36,97 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/writeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/string3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/suit_bold"
+                android:gravity="left|center_vertical"
+                android:text="리뷰작성하기"
+                android:textColor="@color/black_400"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/size_26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginStart="66dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_star_off"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/string3" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:src="@drawable/ic_star_off"
+                android:layout_marginStart="@dimen/size_12"
+                app:layout_constraintBottom_toBottomOf="@+id/star1"
+                app:layout_constraintStart_toEndOf="@+id/star1"
+                app:layout_constraintTop_toTopOf="@+id/star1"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:src="@drawable/ic_star_off"
+                android:layout_marginStart="@dimen/size_12"
+                app:layout_constraintBottom_toBottomOf="@+id/star2"
+                app:layout_constraintStart_toEndOf="@+id/star2"
+                app:layout_constraintTop_toTopOf="@+id/star2" />
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:src="@drawable/ic_star_off"
+                android:layout_marginStart="@dimen/size_12"
+                app:layout_constraintBottom_toBottomOf="@+id/star3"
+                app:layout_constraintStart_toEndOf="@+id/star3"
+                app:layout_constraintTop_toTopOf="@+id/star3" />
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="@dimen/size_40"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginStart="@dimen/size_12"
+                android:src="@drawable/ic_star_off"
+                app:layout_constraintBottom_toBottomOf="@+id/star4"
+                app:layout_constraintStart_toEndOf="@+id/star4"
+                app:layout_constraintTop_toTopOf="@+id/star4"
+                app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/edt_review"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="리뷰를 입력하세요"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/star4"
+                android:maxLength="200"/>
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="작성"
+                app:layout_constraintTop_toBottomOf="@id/edt_review"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="10dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -44,7 +135,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/writeLayout"
             tools:listitem="@layout/review_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

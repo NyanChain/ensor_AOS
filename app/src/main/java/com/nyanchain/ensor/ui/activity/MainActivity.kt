@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
 //            .commitAllowingStateLoss()
 
 
-        binding.mainBnv.selectedItemId = R.id.homeFragment
+        binding.mainBnv.selectedItemId = R.id.qrFragment
+        //Todo: 초기화면에서 ..... 탭 클릭하지 않아도.. 바로 화면 뜨게 !!
         binding.mainBnv.setOnItemSelectedListener{ item ->
             when (item.itemId) {
                 R.id.homeFragment -> {

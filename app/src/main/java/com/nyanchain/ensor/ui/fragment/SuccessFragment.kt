@@ -25,9 +25,13 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
     private lateinit var retService: APIs
     private var productName =GlobalApplication.prefs.getString("productName", "=")
     private var productId =GlobalApplication.prefs.getString("productId", "")
+    private var qrCodeData =GlobalApplication.prefs.getString("qrCodeData", "")
     private var censorText = GlobalApplication.prefs.getString("censorText", "")
     private var censorCom = GlobalApplication.prefs.getString("censorCom", "")
     private var imgUrl =  GlobalApplication.prefs.getString("imgUrl", "")
+
+    private var star: Int = 0
+    private var message: String = ""
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -43,6 +47,28 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
             .getRetrofitInstance()
             .create(APIs::class.java)
 
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    val response = retService.getRate("10007비건쿠션") //Todo; 수정해야됨..
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        star = body?.star!!
+                        message = body?.message.toString()
+                        Log.d("SuccessFragment - getRate 통신 성공", "Result: $response")
+
+                    } else {
+                        Log.d("SuccessFragment - getRate 통신 요청 실패", "Result: $response")
+                    }
+                } catch (e: Exception) {
+                    Log.d("SuccessFragment - getRate 통신 실패", "Result: $e")
+                }
+            }
+        }
+
+        binding.tvRate.text = star.toString()
+        binding.tvMessage.text = message
+
         binding.productName.text = productName
         binding.authenticationCertification.text = censorCom
         binding.authenticationContext.text = censorText
@@ -54,9 +80,9 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                 .into(binding.authenticationImage)
         }
 
+
         binding.btnReview.setOnClickListener {
             val reviewFragment = ReviewFragment() // 이동할 Fragment 객체를 생성
-
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.successLayout, reviewFragment)
             transaction.addToBackStack(null) // 이전 Fragment 스택에 추가 (뒤로 가기 버튼 사용 가능)
@@ -68,16 +94,17 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
-                        val response = retService.postSave(APIs.SaveRequest(productId, productName))
+                        val response = retService.postSave(APIs.SaveRequest(qrCodeData))
                         if (response.isSuccessful) {
-                            Log.d("SuccessFragment 통신 성공", "Result: $response")
+                            Log.d("SuccessFragment - postSave 통신 성공", "Result: $response")
                             Toast.makeText(context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+                            //Todo: Toast message 제대로 뜨게 확니하기 !!~!~!~!~
 
                         } else {
-                            Log.d("SuccessFragment 통신 요청 실패", "Result: $response")
+                            Log.d("SuccessFragment - postSave통신 요청 실패", "Result: $response")
                         }
                     } catch (e: Exception) {
-                        Log.d("SuccessFragment 통신 실패", "Result: $e")
+                        Log.d("SuccessFragment - postSave 통신 실패", "Result: $e")
                     }
                 }
             }
