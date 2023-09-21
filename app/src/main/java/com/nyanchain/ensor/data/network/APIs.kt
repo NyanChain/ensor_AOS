@@ -20,9 +20,21 @@ interface APIs {
         @Body body: QrRequest
     ) : Response<JsonElement> //Todo: 백엔드 수정되면 QrResponse로 수정
 
-    @GET("/review") //임의로 설정. 백보고 api 다시확인필요
+    data class WriteRequest(val product: String, val star: Int, val review: String)
+    @POST("/write")
+    suspend fun postWrite(
+        @Body body: WriteRequest
+    ) : Response<JsonElement>
+
+    @GET("/review")
     suspend fun getReview(
+        @Query("product") product: String
     ) : Response<List<ReviewResponse>>
+
+    @GET("/rate")
+    suspend fun getRate(
+        @Query("product") product: String
+    ) : Response<RateResponse>
 
     @GET("/mypage")
     suspend fun myPage(
@@ -36,7 +48,7 @@ interface APIs {
     suspend fun getVegan(
     ): Response<List<VeganResponse>>
 
-    data class SaveRequest(val qrCodeData: String, var productName: String)
+    data class SaveRequest(val qrCodeData: String)
     @POST("/save")
     suspend fun postSave(
         @Body body: SaveRequest

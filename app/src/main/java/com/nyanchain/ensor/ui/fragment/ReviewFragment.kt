@@ -1,23 +1,31 @@
 package com.nyanchain.ensor.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nyanchain.ensor.R
 import com.nyanchain.ensor.base.BaseFragment
 import com.nyanchain.ensor.data.network.APIs
 import com.nyanchain.ensor.databinding.FragmentReviewBinding
+import com.nyanchain.ensor.retrofit.RetrofitClient
 import com.nyanchain.ensor.ui.adapter.ReviewRecyclerViewAdapter
 import com.nyanchain.ensor.ui.viewmodel.ReviewViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
 
     private lateinit var retService: APIs
-    private var isClicked = false
+    private var review: String = ""
     private lateinit var reviewViewModel: ReviewViewModel
     private lateinit var reviewRecyclerViewAdapter: ReviewRecyclerViewAdapter
 
@@ -30,9 +38,73 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        retService = RetrofitClient
+            .getRetrofitInstance()
+            .create(APIs::class.java)
+
+//        binding.star1.setOnClickListener {
+//            rating = 1.0
+//            binding.star1.setImageResource(R.drawable.ic_star_on)
+//            binding.star2.setImageResource(R.drawable.ic_star_off)
+//            binding.star3.setImageResource(R.drawable.ic_star_off)
+//            binding.star4.setImageResource(R.drawable.ic_star_off)
+//            binding.star5.setImageResource(R.drawable.ic_star_off)
+//        }
+//        binding.star2.setOnClickListener {
+//            rating = 2.0
+//            binding.star1.setImageResource(R.drawable.ic_star_on)
+//            binding.star2.setImageResource(R.drawable.ic_star_on)
+//            binding.star3.setImageResource(R.drawable.ic_star_off)
+//            binding.star4.setImageResource(R.drawable.ic_star_off)
+//            binding.star5.setImageResource(R.drawable.ic_star_off)
+//        }
+//        binding.star3.setOnClickListener {
+//            rating = 3.0
+//            binding.star1.setImageResource(R.drawable.ic_star_on)
+//            binding.star2.setImageResource(R.drawable.ic_star_on)
+//            binding.star3.setImageResource(R.drawable.ic_star_on)
+//            binding.star4.setImageResource(R.drawable.ic_star_off)
+//            binding.star5.setImageResource(R.drawable.ic_star_off)
+//        }
+//        binding.star4.setOnClickListener {
+//            rating = 4.0
+//            binding.star1.setImageResource(R.drawable.ic_star_on)
+//            binding.star2.setImageResource(R.drawable.ic_star_on)
+//            binding.star3.setImageResource(R.drawable.ic_star_on)
+//            binding.star4.setImageResource(R.drawable.ic_star_on)
+//            binding.star5.setImageResource(R.drawable.ic_star_off)
+//        }
+//        binding.star5.setOnClickListener {
+//            rating = 5.0
+//            binding.star1.setImageResource(R.drawable.ic_star_on)
+//            binding.star2.setImageResource(R.drawable.ic_star_on)
+//            binding.star3.setImageResource(R.drawable.ic_star_on)
+//            binding.star4.setImageResource(R.drawable.ic_star_on)
+//            binding.star5.setImageResource(R.drawable.ic_star_on)
+//        }
+
 
         initRecyclerView()
 
+        binding.btnSubmit.setOnClickListener {
+            review = binding.edtReview.text.toString()
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    try { //Todo: 수정해야됨!!!!
+                        val response = retService.postWrite(APIs.WriteRequest("10007비건쿠션", 4,review))
+                        if (response.isSuccessful) {
+                            Log.d("ReviewFragment 통신 성공", "Result: $response")
+
+                        } else {
+                            Log.d("ReviewFragment 통신 요청 실패", "Result: $response")
+                        }
+                    } catch (e: Exception) {
+                        Log.d("ReviewFragment 통신 실패", "Result: $e")
+                    }
+                }
+            }
+
+        }
 
     }
 
