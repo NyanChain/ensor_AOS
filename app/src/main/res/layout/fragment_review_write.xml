@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.fragment.ReviewWriteFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 상단바 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/bg_under_line_gray">
+
+            <ImageView
+                android:id="@+id/imageButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/layout_margin_start"/>
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/suit_regular"
+                android:text="Write a review"
+                android:textColor="@color/black_500"
+                android:textSize="16sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/size_24"
+            android:src="@drawable/iv_sample_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
+
+
+        <TextView
+            android:id="@+id/categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chiness Food"
+            android:textColor="@color/green_main"
+            android:textSize="12sp"
+            android:layout_marginStart="@dimen/size_10"
+            app:layout_constraintStart_toEndOf="@+id/imageView13"
+            app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_semibold"
+            android:text="Restaurant Menu"
+            android:textColor="@color/black_500"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/categories"
+            app:layout_constraintTop_toBottomOf="@+id/categories" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/gray_layout"
+            android:layout_marginTop="@dimen/size_88"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
+            tools:layout_editor_absoluteX="0dp" >
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/string3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_extrabold"
+            android:gravity="left|center_vertical"
+            android:text="How was it overall?"
+            android:textColor="@color/gray_1E2321"
+            android:textSize="24sp"
+            android:layout_marginTop="@dimen/size_26"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <ImageView
+            android:id="@+id/star1"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="66dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_star_off"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/string3" />
+
+        <ImageView
+            android:id="@+id/star2"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:src="@drawable/ic_star_off"
+            android:layout_marginStart="@dimen/size_12"
+            app:layout_constraintBottom_toBottomOf="@+id/star1"
+            app:layout_constraintStart_toEndOf="@+id/star1"
+            app:layout_constraintTop_toTopOf="@+id/star1"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/star3"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:src="@drawable/ic_star_off"
+            android:layout_marginStart="@dimen/size_12"
+            app:layout_constraintBottom_toBottomOf="@+id/star2"
+            app:layout_constraintStart_toEndOf="@+id/star2"
+            app:layout_constraintTop_toTopOf="@+id/star2" />
+
+        <ImageView
+            android:id="@+id/star4"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:src="@drawable/ic_star_off"
+            android:layout_marginStart="@dimen/size_12"
+            app:layout_constraintBottom_toBottomOf="@+id/star3"
+            app:layout_constraintStart_toEndOf="@+id/star3"
+            app:layout_constraintTop_toTopOf="@+id/star3" />
+
+        <ImageView
+            android:id="@+id/star5"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/size_12"
+            android:src="@drawable/ic_star_off"
+            app:layout_constraintBottom_toBottomOf="@+id/star4"
+            app:layout_constraintStart_toEndOf="@+id/star4"
+            app:layout_constraintTop_toTopOf="@+id/star4"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="@dimen/size_40"
+            android:background="@color/gray_layout"
+            app:layout_constraintTop_toBottomOf="@+id/star5"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Optional"
+            android:textColor="@color/gray_400"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/size_24"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+
+
+
+        <TextView
+            android:id="@+id/tv_name3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_extrabold"
+            android:text="Restaurant Menu"
+            android:textColor="@color/gray_1E2321"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/string" />
+
+
+        <EditText
+            android:id="@+id/review_text"
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:background="@drawable/bg_review_radius"
+            android:hint="Please enter a review.\n(200 character limit)"
+            android:inputType="textMultiLine"
+            android:maxLength="200"
+            android:padding="@dimen/size_16"
+            android:imeOptions="actionDone"
+            android:textColor="@color/gray_600"
+            android:textSize="14sp"
+            android:fontFamily="@font/suit_regular"
+            android:gravity="top|left"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginEnd="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/size_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name3" />
+
+        <ImageView
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:src="@drawable/btn_save"
+            android:layout_marginBottom="@dimen/size_70"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
