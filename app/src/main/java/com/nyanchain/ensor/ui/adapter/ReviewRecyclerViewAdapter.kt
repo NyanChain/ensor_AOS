@@ -42,7 +42,7 @@ class ReviewRecyclerViewAdapter(
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         // UI 요소에 대한 참조를 정의합니다.
         private val nickname: TextView = view.findViewById(R.id.tv_nickname)
-        private val rate: TextView = view.findViewById(R.id.tv_rate)
+//        private val rate: TextView = view.findViewById(R.id.tv_rate)
         private val review: TextView = view.findViewById(R.id.tv_review)
 
         var isClicked = false
@@ -52,7 +52,7 @@ class ReviewRecyclerViewAdapter(
         fun bind(task: ReviewResponse, clickListener: (ReviewResponse) -> Unit) {
 
             nickname.text = "닉네임 : " + task.nickname
-            rate.text = "별점 : " + task.rate
+//            rate.text = "별점 : " + task.rate
             review.text = "리뷰 : " + task.review
 
 

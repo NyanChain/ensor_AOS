@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config>
-        <trust-anchors>
-            <!-- 사전 설치된 시스템 CA를 신뢰합니다 -->
-            <certificates src="system" />
-            <!-- 선택적으로, 사용자가 추가한 CA를 신뢰합니다 -->
-            <certificates src="user" />
-        </trust-anchors>
-    </base-config>
+    <base-config cleartextTrafficPermitted="true" />
 </network-security-config>

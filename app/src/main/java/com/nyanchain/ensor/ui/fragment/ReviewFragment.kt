@@ -94,7 +94,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     try { //Todo: 수정해야됨!!!!
-                        val response = retService.postWrite(APIs.WriteRequest(product, rating,review))
+                        val response = retService.postWrite(APIs.WriteRequest(product, rating, review))
                         if (response.isSuccessful) {
                             Log.d("ReviewFragment 통신 성공", "Result: $response")
 

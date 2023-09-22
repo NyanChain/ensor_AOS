@@ -67,16 +67,6 @@
             app:layout_constraintStart_toEndOf="@+id/text"
             app:layout_constraintTop_toTopOf="@+id/text" />
 
-        <TextView
-            android:id="@+id/my_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/suit_semibold"
-            android:text=""
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_email"
-            app:layout_constraintStart_toEndOf="@+id/tv_email"
-            app:layout_constraintTop_toTopOf="@+id/tv_email" />
 
         <TextView
             android:id="@+id/text2"
@@ -91,7 +81,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
         <TextView
-            android:id="@+id/tv_nickname"
+            android:id="@+id/tv_mynickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/suit_semibold"
@@ -99,17 +89,6 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/text2"
             app:layout_constraintStart_toEndOf="@+id/text2"/>
-
-        <TextView
-            android:id="@+id/my_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/suit_semibold"
-            android:text=""
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_email"
-            app:layout_constraintStart_toEndOf="@+id/tv_email"
-            app:layout_constraintTop_toTopOf="@+id/tv_email" />
 
         <TextView
             android:id="@+id/btn_saved_list"

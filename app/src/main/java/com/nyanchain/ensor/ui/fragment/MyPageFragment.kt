@@ -44,7 +44,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>() {
                     if (myPageResponse != null) {
 //                        // Update UI with myPageResponse data
                         binding.tvEmail.text = myPageResponse.email
-                        binding.tvNickname.text = myPageResponse.nickname
+                        binding.tvMynickname.text = myPageResponse.nickname
                         Log.d("MyPageFragment 통신 성공", "Response: ${myPageResponse.toString()}")
                     }
                 } else {

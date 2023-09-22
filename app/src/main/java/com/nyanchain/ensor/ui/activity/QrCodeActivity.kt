@@ -56,10 +56,10 @@ class QrCodeActivity : AppCompatActivity() {
                         val response = retService.postQr(APIs.QrRequest(resultText.toString()))
                         if (response.isSuccessful) {
                             Log.d("ScanQRCodeActivity 통신 성공", "QR Code Result: ${response.body()}")
-                            // Todo: 아래 코드는 response 형식 QrResponse로 변경하면 살리기
-
+    
                             val jsonObject = JSONObject(response.body().toString())
                             val resultsArray = jsonObject.getJSONArray("results")
+                            Log.d("ScanQRCodeActivity resultArray", "$resultsArray")
 
 
                             validity = jsonObject.get("tfresult").toString()
