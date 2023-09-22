@@ -1,17 +1,18 @@
 package com.nyanchain.ensor.ui.activity
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import com.nyanchain.ensor.Constants.REQUEST_CODE
 import com.nyanchain.ensor.ui.fragment.HomeFragment
 import com.nyanchain.ensor.ui.fragment.MyPageFragment
 import com.nyanchain.ensor.ui.fragment.QrFragment
 import com.nyanchain.ensor.R
 import com.nyanchain.ensor.databinding.ActivityMainBinding
-import com.nyanchain.ensor.ui.fragment.*
 import com.nyanchain.ensor.ui.fragment.SuccessFragment
+import com.nyanchain.ensor.ui.fragment.FailFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -21,61 +22,62 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragment = intent.getStringExtra("fragment").toString()
-        Log.d("fragment", fragment.toString())
-        if (fragment != null) {
-            if (fragment == "success") {
-                // Success 처리
-                val successFragment = SuccessFragment()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, successFragment)
-                    .commit()
-            } else if (fragment == "fail") {
-                // Fail 처리
-                val failFragment = FailFragment()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, failFragment)
-                    .commit()
-            }
-        }
-
         initBottomNavigation()
     }
 
-
     private fun initBottomNavigation() {
 
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.main_frm, QrFragment())
-//            .commitAllowingStateLoss()
-
-
         binding.mainBnv.selectedItemId = R.id.qrFragment
-        //Todo: 초기화면에서 ..... 탭 클릭하지 않아도.. 바로 화면 뜨게 !!
-        binding.mainBnv.setOnItemSelectedListener{ item ->
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, QrFragment())
+            .commitAllowingStateLoss()
+
+        binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, HomeFragment())
                         .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
+                    true
                 }
-
                 R.id.qrFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, QrFragment())
                         .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
+                    true
                 }
-
                 R.id.mypageFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, MyPageFragment())
                         .commitAllowingStateLoss()
-                    return@setOnItemSelectedListener true
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.d("onActivityResult", "requestCode: $requestCode, resultCode: $resultCode, data: $data")
+
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val fragment = data?.getStringExtra("fragment")
+            when (fragment) {
+                "success" -> {
+                    val successFragment = SuccessFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_frm, successFragment)
+                        .commit()
+                }
+                "fail" -> {
+                    val failFragment = FailFragment()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_frm, failFragment)
+                        .commit()
                 }
             }
-            false
         }
     }
 }
