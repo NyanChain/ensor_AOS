@@ -56,28 +56,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        Log.d("onActivityResult", "requestCode: $requestCode, resultCode: $resultCode, data: $data")
-
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val fragment = data?.getStringExtra("fragment")
-            when (fragment) {
-                "success" -> {
-                    val successFragment = SuccessFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, successFragment)
-                        .commit()
-                }
-                "fail" -> {
-                    val failFragment = FailFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, failFragment)
-                        .commit()
-                }
-            }
-        }
-    }
 }
