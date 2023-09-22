@@ -45,8 +45,6 @@ class ResultActivity : AppCompatActivity() {
 
         private fun initBottomNavigation() {
 
-            binding.mainBnv.selectedItemId = R.id.qrFragment
-
             binding.mainBnv.setOnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.homeFragment -> {
