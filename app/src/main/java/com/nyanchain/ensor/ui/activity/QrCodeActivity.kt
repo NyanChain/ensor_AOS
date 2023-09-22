@@ -72,15 +72,15 @@ class QrCodeActivity : AppCompatActivity() {
                                 GlobalApplication.prefs.setString("censorCom", firstResultObject.getString("censorCom"))
                                 GlobalApplication.prefs.setString("imgUrl", firstResultObject.getString("imgUrl"))
 
-                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-                                mainActivity.putExtra("fragment", successText)
-                                startActivity(mainActivity)
+                                val resultActivity = Intent(this@QrCodeActivity, ResultActivity::class.java)
+                                resultActivity.putExtra("fragment", successText)
+                                startActivity(resultActivity)
                                 finish()
                             } else {
                                 val failText = "fail"
-                                val mainActivity = Intent(this@QrCodeActivity, MainActivity::class.java)
-                                mainActivity.putExtra("fragment", failText)
-                                startActivity(mainActivity)
+                                val resultActivity = Intent(this@QrCodeActivity, ResultActivity::class.java)
+                                resultActivity.putExtra("fragment", failText)
+                                startActivity(resultActivity)
                                 finish()
                             }
 

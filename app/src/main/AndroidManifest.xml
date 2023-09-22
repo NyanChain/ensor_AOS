@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
         android:name=".GlobalApplication"
@@ -14,47 +15,41 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:screenOrientation="fullSensor"
-        tools:replace="screenOrientation"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ensor"
-        tools:targetApi="31"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="true">
-
-
-
-    <!--            스크린 세로모드-->
+        android:usesCleartextTraffic="true"
+        tools:replace="screenOrientation"
+        tools:targetApi="31">
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <!-- 스크린 세로모드 -->
         <activity
             android:name=".ui.activity.QrCodeActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".ui.activity.FirstActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".ui.activity.MainActivity"
-            android:exported="true">
-
-        </activity>
-
-        <!-- Kakao 로그인 -->
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="true"></activity> <!-- Kakao 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -63,8 +58,8 @@
                 <data
                     android:host="oauth"
                     android:scheme="kakaobcf3104d8999b4bf8135a157083a63bd" />
-
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
