@@ -19,6 +19,7 @@ import com.nyanchain.ensor.ui.activity.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
 
@@ -50,11 +51,13 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    val response = retService.getRate("10007비건쿠션") //Todo; 수정해야됨..
+                    val response = retService.getRate(qrCodeData) //Todo; 수정해야됨..
                     if (response.isSuccessful) {
                         val body = response.body()
-                        star = body?.star!!
+                        GlobalApplication.prefs.setString("productName", "${body?.product}")
+                        star = body?.rate!!
                         message = body?.message.toString()
+                        setStar(star)
                         Log.d("SuccessFragment - getRate 통신 성공", "Result: $response")
 
                     } else {
@@ -96,8 +99,13 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                     try {
                         val response = retService.postSave(APIs.SaveRequest(qrCodeData))
                         if (response.isSuccessful) {
+                            val jsonResponse = JSONObject(response.body().toString())
+                            val code = jsonResponse.getInt("code")
+                            val message = jsonResponse.getString("message")
                             Log.d("SuccessFragment - postSave 통신 성공", "Result: $response")
-                            Toast.makeText(context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+                            activity?.runOnUiThread {
+                                Toast.makeText(activity?.applicationContext, "저장 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            }
                             //Todo: Toast message 제대로 뜨게 확니하기 !!~!~!~!~
 
                         } else {
@@ -110,5 +118,49 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
             }
         }
 
+    }
+    private fun setStar(star: Int) {
+        if (star == 5) {
+            binding.ivStart1.setImageResource(R.drawable.star_filled)
+            binding.ivStart2.setImageResource(R.drawable.star_filled)
+            binding.ivStart3.setImageResource(R.drawable.star_filled)
+            binding.ivStart4.setImageResource(R.drawable.star_filled)
+            binding.ivStart5.setImageResource(R.drawable.star_filled)
+        }
+        else if (star == 4) {
+            binding.ivStart1.setImageResource(R.drawable.star_filled)
+            binding.ivStart2.setImageResource(R.drawable.star_filled)
+            binding.ivStart3.setImageResource(R.drawable.star_filled)
+            binding.ivStart4.setImageResource(R.drawable.star_filled)
+            binding.ivStart5.setImageResource(R.drawable.star_unfilled)
+        }
+        else if (star == 3) {
+            binding.ivStart1.setImageResource(R.drawable.star_filled)
+            binding.ivStart2.setImageResource(R.drawable.star_filled)
+            binding.ivStart3.setImageResource(R.drawable.star_filled)
+            binding.ivStart4.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart5.setImageResource(R.drawable.star_unfilled)
+        }
+        else if (star == 2) {
+            binding.ivStart1.setImageResource(R.drawable.star_filled)
+            binding.ivStart2.setImageResource(R.drawable.star_filled)
+            binding.ivStart3.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart4.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart5.setImageResource(R.drawable.star_unfilled)
+        }
+        else if (star == 1) {
+            binding.ivStart1.setImageResource(R.drawable.star_filled)
+            binding.ivStart2.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart3.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart4.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart5.setImageResource(R.drawable.star_unfilled)
+        }
+        else if (star == 0) {
+            binding.ivStart1.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart2.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart3.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart4.setImageResource(R.drawable.star_unfilled)
+            binding.ivStart5.setImageResource(R.drawable.star_unfilled)
+        }
     }
 }

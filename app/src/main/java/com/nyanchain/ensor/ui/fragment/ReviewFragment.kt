@@ -22,6 +22,7 @@ import com.nyanchain.ensor.ui.viewmodel.ReviewViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
 
@@ -96,6 +97,12 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
                     try { //Todo: 수정해야됨!!!!
                         val response = retService.postWrite(APIs.WriteRequest(product, rating, review))
                         if (response.isSuccessful) {
+                            val jsonResponse = JSONObject(response.body().toString())
+                            val code = jsonResponse.getInt("code")
+                            val message = jsonResponse.getString("message")
+                            activity?.runOnUiThread {
+                                Toast.makeText(activity?.applicationContext, "$message", Toast.LENGTH_SHORT).show()
+                            }
                             Log.d("ReviewFragment 통신 성공", "Result: $response")
 
                         } else {
