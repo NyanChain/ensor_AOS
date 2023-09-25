@@ -51,7 +51,7 @@ class ReviewRecyclerViewAdapter(
         fun bind(task: ReviewResponse, clickListener: (ReviewResponse) -> Unit) {
 
             nickname.text = "닉네임 : " + task.nickname
-            review.text = "리뷰 : " + task.review
+            review.text = task.review
 
 
 

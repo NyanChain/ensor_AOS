@@ -30,9 +30,9 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
     private var censorText = GlobalApplication.prefs.getString("censorText", "")
     private var censorCom = GlobalApplication.prefs.getString("censorCom", "")
     private var imgUrl =  GlobalApplication.prefs.getString("imgUrl", "")
+    private var message =  GlobalApplication.prefs.getString("message", "")
+    private var star =  GlobalApplication.prefs.getString("star", "")
 
-    private var star: Int = 0
-    private var message: String = ""
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -55,10 +55,11 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                     if (response.isSuccessful) {
                         val body = response.body()
                         GlobalApplication.prefs.setString("productName", "${body?.product}")
-                        star = body?.rate!!
-                        message = body?.message.toString()
-                        setStar(star)
-                        Log.d("SuccessFragment - getRate 통신 성공", "Result: $response")
+                        GlobalApplication.prefs.setString("star", "${body?.rate!!}")
+                        GlobalApplication.prefs.setString("message", "${body?.message}")
+                        setStar(body?.rate)
+                        binding.invalidateAll()
+                        Log.d("SuccessFragment - getRate 통신 성공", "Result: ${response.body()}")
 
                     } else {
                         Log.d("SuccessFragment - getRate 통신 요청 실패", "Result: $response")
@@ -69,7 +70,8 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
             }
         }
 
-        binding.tvRate.text = star.toString()
+        binding.tvRate.text = star
+//        setStar(star.toInt())
         binding.tvMessage.text = message
 
         binding.productName.text = productName
@@ -99,14 +101,10 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                     try {
                         val response = retService.postSave(APIs.SaveRequest(qrCodeData))
                         if (response.isSuccessful) {
-                            val jsonResponse = JSONObject(response.body().toString())
-                            val code = jsonResponse.getInt("code")
-                            val message = jsonResponse.getString("message")
                             Log.d("SuccessFragment - postSave 통신 성공", "Result: $response")
                             activity?.runOnUiThread {
                                 Toast.makeText(activity?.applicationContext, "저장 성공했습니다.", Toast.LENGTH_SHORT).show()
                             }
-                            //Todo: Toast message 제대로 뜨게 확니하기 !!~!~!~!~
 
                         } else {
                             Log.d("SuccessFragment - postSave통신 요청 실패", "Result: $response")
@@ -119,6 +117,8 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
         }
 
     }
+
+
     private fun setStar(star: Int) {
         if (star == 5) {
             binding.ivStart1.setImageResource(R.drawable.star_filled)

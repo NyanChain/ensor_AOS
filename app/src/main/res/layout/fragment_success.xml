@@ -46,21 +46,21 @@
                 android:id="@+id/iv_start1"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/star_unfilled"
+                android:src="@drawable/star_filled"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
             <ImageView
                 android:id="@+id/iv_start2"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/star_unfilled"
+                android:src="@drawable/star_filled"
                 app:layout_constraintStart_toEndOf="@id/iv_start1"
                 app:layout_constraintTop_toTopOf="parent"/>
             <ImageView
                 android:id="@+id/iv_start3"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/star_unfilled"
+                android:src="@drawable/star_filled"
                 app:layout_constraintStart_toEndOf="@id/iv_start2"
                 app:layout_constraintTop_toTopOf="parent"/>
             <ImageView
@@ -81,7 +81,7 @@
                 android:id="@+id/tv_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0"
+                android:text="3"
                 android:textColor="@color/black_400"
                 app:layout_constraintStart_toEndOf="@id/iv_start5"
                 app:layout_constraintTop_toTopOf="parent"
