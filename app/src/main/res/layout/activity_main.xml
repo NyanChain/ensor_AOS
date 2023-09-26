@@ -18,10 +18,21 @@
             tools:layout_editor_absoluteX="-16dp">
         </FrameLayout>
 
+        <!-- ResultFragment가 띄워질 Container -->
+        <FrameLayout
+            android:id="@+id/result_frm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@id/main_bnv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:paddingBottom="60dp"
+            android:visibility="gone"/>  <!-- 처음에는 안보이게 설정 -->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bnv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:itemIconSize="25dp"
             app:itemIconTint="@drawable/btm_color_selector"
             app:itemTextColor="@drawable/btm_color_selector"
