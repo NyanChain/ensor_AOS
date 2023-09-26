@@ -113,9 +113,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>()  {
                     }
                 }
             }
-
         }
-
     }
 
     private fun initRecyclerView() {

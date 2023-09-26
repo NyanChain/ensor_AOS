@@ -5,7 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.nyanchain.ensor.Constants.REQUEST_CODE
+import com.nyanchain.ensor.GlobalApplication
 import com.nyanchain.ensor.ui.fragment.HomeFragment
 import com.nyanchain.ensor.ui.fragment.MyPageFragment
 import com.nyanchain.ensor.ui.fragment.QrFragment
@@ -23,6 +25,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
+
+        val fragment = intent.getStringExtra("fragment").toString()
+        Log.d("fragment", fragment.toString())
+        if (fragment != null) {
+            if (fragment == "success") {
+                // Success 처리
+                binding.resultFrm.visibility = View.VISIBLE
+                val successFragment = SuccessFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.result_frm, successFragment)
+                    .commit()
+            } else if (fragment == "fail") {
+                // Fail 처리
+                binding.resultFrm.visibility = View.VISIBLE
+                val failFragment = FailFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.result_frm, failFragment)
+                    .commit()
+            }
+        } else {
+            binding.resultFrm.visibility = View.GONE
+            initBottomNavigation()
+        }
+
     }
 
     private fun initBottomNavigation() {

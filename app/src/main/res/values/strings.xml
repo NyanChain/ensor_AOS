@@ -18,7 +18,7 @@
     <string name="tv_retry">다시 QR 인증 하기</string>
 
     <!--    my page-->
-    <string name="tv_email">Email : </string>
+    <string name="tv_email">이메일 : </string>
     <string name="tv_nickname">닉네임 : </string>
     <string name="tv_save">저장된 인증 정보</string>
 

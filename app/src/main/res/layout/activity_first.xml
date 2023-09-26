@@ -4,20 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ensor_main"
     tools:context=".ui.activity.FirstActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ensor_main"
+        android:scaleType="centerCrop"/>
 
-    <ImageButton
+    <TextView
         android:id="@+id/btn_start_kakao_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="100dp"
-        android:src="@drawable/kakao_login"
-        android:background="@android:color/transparent"
+        android:background="@drawable/bg_button_gray"
+        android:gravity="center"
+        android:text="카카오톡으로 로그인"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:backgroundTint="#FFEA20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/kakao"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_start_kakao_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_start_kakao_login"
+        app:layout_constraintTop_toTopOf="@+id/btn_start_kakao_login" />
 
     <Button
         android:id="@+id/btn_start_kakao_logout"
@@ -52,17 +69,17 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_start_kakao_logout" />
 
 
-    <TextView
-        android:id="@+id/tv_hashKey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_start_kakao_unlink" />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_hashKey"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="14dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_start_kakao_unlink" />-->
 
 
 

@@ -51,16 +51,17 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    val response = retService.getRate(qrCodeData) //Todo; 수정해야됨..
+                    val response = retService.getRate(qrCodeData)
                     if (response.isSuccessful) {
                         val body = response.body()
                         GlobalApplication.prefs.setString("productName", "${body?.product}")
                         GlobalApplication.prefs.setString("star", "${body?.rate!!}")
                         GlobalApplication.prefs.setString("message", "${body?.message}")
-                        setStar(body?.rate)
-                        binding.invalidateAll()
-                        Log.d("SuccessFragment - getRate 통신 성공", "Result: ${response.body()}")
-
+                        withContext(Dispatchers.Main) {
+                            setStar(body?.rate)  // Main 스레드에서 실행
+                            binding.invalidateAll()
+                            Log.d("SuccessFragment - getRate 통신 성공", "Result: ${response.body()}")
+                        }
                     } else {
                         Log.d("SuccessFragment - getRate 통신 요청 실패", "Result: $response")
                     }
@@ -89,23 +90,21 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
         binding.btnReview.setOnClickListener {
             val reviewFragment = ReviewFragment() // 이동할 Fragment 객체를 생성
             val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.successLayout, reviewFragment)
+            transaction.replace(R.id.main_frm, reviewFragment)
             transaction.addToBackStack(null) // 이전 Fragment 스택에 추가 (뒤로 가기 버튼 사용 가능)
             transaction.commit()
         }
 
         binding.btnSave.setOnClickListener{
-            // QR 결과값 서버 post
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     try {
                         val response = retService.postSave(APIs.SaveRequest(qrCodeData))
                         if (response.isSuccessful) {
-                            Log.d("SuccessFragment - postSave 통신 성공", "Result: $response")
-                            activity?.runOnUiThread {
-                                Toast.makeText(activity?.applicationContext, "저장 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(activity?.applicationContext, "저장에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                                Log.d("SuccessFragment - postSave 통신 성공", "Result: $response")
                             }
-
                         } else {
                             Log.d("SuccessFragment - postSave통신 요청 실패", "Result: $response")
                         }
