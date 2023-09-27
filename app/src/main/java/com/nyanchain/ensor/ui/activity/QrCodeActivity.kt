@@ -58,12 +58,12 @@ class QrCodeActivity : AppCompatActivity() {
                             Log.d("ScanQRCodeActivity 통신 성공", "QR Code Result: ${response.body()}")
     
                             val jsonObject = JSONObject(response.body().toString())
-                            val resultsArray = jsonObject.getJSONArray("results")
-                            Log.d("ScanQRCodeActivity resultArray", "$resultsArray")
-
 
                             validity = jsonObject.get("tfresult").toString()
+
                             if (validity == "success") {
+                                val resultsArray = jsonObject.getJSONArray("results")
+                                //Log.d("ScanQRCodeActivity resultArray", "$resultsArray")
                                 val successText = "success"
                                 val firstResultObject = resultsArray.getJSONObject(0)
                                 val censorText =
@@ -77,7 +77,7 @@ class QrCodeActivity : AppCompatActivity() {
                                 startActivity(resultActivity)
                                 finish()
                             } else {
-                                val failText = "fail"
+                                val failText = "failure"
                                 val resultActivity = Intent(this@QrCodeActivity, ResultActivity::class.java)
                                 resultActivity.putExtra("fragment", failText)
                                 startActivity(resultActivity)

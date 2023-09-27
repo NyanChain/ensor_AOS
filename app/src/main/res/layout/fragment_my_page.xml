@@ -64,6 +64,7 @@
             android:fontFamily="@font/suit_semibold"
             android:text=""
             android:textSize="16sp"
+            android:layout_marginStart="5sp"
             app:layout_constraintStart_toEndOf="@+id/text"
             app:layout_constraintTop_toTopOf="@+id/text" />
 
@@ -87,6 +88,7 @@
             android:fontFamily="@font/suit_semibold"
             android:text=""
             android:textSize="16sp"
+            android:layout_marginStart="5sp"
             app:layout_constraintBottom_toBottomOf="@+id/text2"
             app:layout_constraintStart_toEndOf="@+id/text2"/>
 

@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="green_main">#5AC378</color>
+    <color name="blue_main">#2EB3BC</color>
+    <color name="red_main">#BC372E</color>
+
     <color name="black_500">#757272</color>
     <color name="black_400">#656565</color>
     <color name="gray_400">#757272</color>

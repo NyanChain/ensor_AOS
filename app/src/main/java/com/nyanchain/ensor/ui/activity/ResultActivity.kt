@@ -24,7 +24,7 @@ class ResultActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, successFragment)
                     .commit()
-            } else if (fragment == "fail") {
+            } else if (fragment == "failure") {
                 // Fail 처리
                 val failFragment = FailFragment()
                 supportFragmentManager.beginTransaction()
@@ -45,7 +45,7 @@ class ResultActivity : AppCompatActivity() {
 
 
         binding.mainBnv.selectedItemId = R.id.qrFragment
-        //Todo: 초기화면에서 ..... 탭 클릭하지 않아도.. 바로 화면 뜨게 !!
+
         binding.mainBnv.setOnItemSelectedListener{ item ->
             when (item.itemId) {
                 R.id.homeFragment -> {

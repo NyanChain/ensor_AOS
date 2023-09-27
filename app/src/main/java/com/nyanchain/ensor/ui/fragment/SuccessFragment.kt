@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.nyanchain.ensor.GlobalApplication
@@ -31,7 +32,6 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
     private var censorCom = GlobalApplication.prefs.getString("censorCom", "")
     private var imgUrl =  GlobalApplication.prefs.getString("imgUrl", "")
     private var message =  GlobalApplication.prefs.getString("message", "")
-    private var star =  GlobalApplication.prefs.getString("star", "")
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -53,13 +53,19 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                 try {
                     val response = retService.getRate(qrCodeData)
                     if (response.isSuccessful) {
-                        val body = response.body()
-                        GlobalApplication.prefs.setString("productName", "${body?.product}")
-                        GlobalApplication.prefs.setString("star", "${body?.rate!!}")
-                        GlobalApplication.prefs.setString("message", "${body?.message}")
+                        GlobalApplication.prefs.setString("productName", "${response.body()?.product}")
+                        val message = response.body()?.message
+                        val star = response.body()?.rate ?: 0
+                        GlobalApplication.prefs.setString("message", message ?: "")
+                        GlobalApplication.prefs.setString("star", star.toString())
                         withContext(Dispatchers.Main) {
-                            setStar(body?.rate)  // Main 스레드에서 실행
-                            binding.invalidateAll()
+                            binding.tvRate.text = star.toString()
+                            binding.tvMessage.text = message
+                            if (message == "안전")
+                                binding.tvMessage.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue_main))
+                            else if (message == "위험")
+                                binding.tvMessage.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_main))
+                            setStar(star)  // Main 스레드에서 실행
                             Log.d("SuccessFragment - getRate 통신 성공", "Result: ${response.body()}")
                         }
                     } else {
@@ -71,8 +77,6 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
             }
         }
 
-        binding.tvRate.text = star
-//        setStar(star.toInt())
         binding.tvMessage.text = message
 
         binding.productName.text = productName
@@ -85,6 +89,7 @@ class SuccessFragment : BaseFragment<FragmentSuccessBinding>()  {
                 .load(imgUrl)
                 .into(binding.authenticationImage)
         }
+//        binding.invalidateAll()
 
 
         binding.btnReview.setOnClickListener {
