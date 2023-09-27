@@ -175,7 +175,7 @@
             android:textColor="@color/black_400"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_authentication_certification" />
+            app:layout_constraintTop_toBottomOf="@+id/authentication_certification" />
 
         <TextView
             android:id="@+id/authentication__context"
